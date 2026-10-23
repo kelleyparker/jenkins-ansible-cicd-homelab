@@ -6,10 +6,10 @@ and examples; it does not certify that the VMs or ten targets have been tested.
 | Item | Result / link / date |
 | --- | --- |
 | Jenkins URL and job name | Pending lab setup |
-| Runner OS | Verify Ubuntu 24.04 on cicd-runner |
+| Runner OS | Ubuntu 26.04 LTS; confirmed by VM terminal output |
 | Actual target count | Initial inventory: one; deployment not yet recorded |
 | Git commit tested | Pending |
-| Successful validation build | Pending |
+| Successful validation build | Jenkins build #1 succeeded on October 22, 2026; screenshot reviewed |
 | Dry-run diff reviewed | Pending |
 | Approval recorded | Pending |
 | Successful deployment + smoke artifact | Pending |

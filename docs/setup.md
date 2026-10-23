@@ -1,4 +1,4 @@
-# Set up the two existing Ubuntu 24.04 VMs
+# Set up the two existing Ubuntu 24.04 or 26.04 VMs
 
 Run Linux commands below on the indicated VM. Replace `labadmin`, IP addresses,
 and credential examples with your actual values. No VM is contacted by merely
@@ -157,7 +157,7 @@ the actual gated demonstration and capture its evidence.
 ## 7. Expand the inventory
 
 `inventories/examples/ten-node.hosts.ini` shows the shape of a ten-target
-inventory using documentation-only addresses. Add actual Ubuntu 24.04 machines
+inventory using documentation-only addresses. Add actual Ubuntu 24.04 or 26.04 machines
 to `inventories/lab/hosts.ini`, configure SSH and verified host keys, and bootstrap
 every new target. Run `ansible-inventory --graph` to check the membership.
 Deployment and smoke tests then automatically cover all hosts in `nginx`.

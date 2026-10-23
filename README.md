@@ -1,6 +1,6 @@
 # Jenkins + Ansible CI/CD Home Lab
 
-A practical Ubuntu 24.04 / Hyper-V lab: validate infrastructure code, preview the
+A practical Ubuntu 24.04 or 26.04 / Hyper-V lab: validate infrastructure code, preview the
 changes, approve a deployment, and verify the Jenkins build number on every target.
 
 The initial inventory contains **one target**, `cicd-target`. A ten-node inventory
@@ -64,7 +64,7 @@ not install Jenkins, create Hyper-V VMs, or claim to provision them with Vagrant
 
 ## Run the checks yourself
 
-On Ubuntu 24.04, from the repository root:
+On Ubuntu 24.04 or 26.04, from the repository root:
 
 ```bash
 sudo apt-get update
