@@ -1,0 +1,4 @@
+---
+nginx_http_port: 8080
+# No default build number: a deployment must identify its build explicitly.
+nginx_content_dir: "{{ playbook_dir }}/../svn-seed/trunk"

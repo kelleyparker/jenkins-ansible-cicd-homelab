@@ -1,0 +1,52 @@
+---
+- name: Validate build metadata and listen port
+  ansible.builtin.assert:
+    that:
+      - nginx_build_number is defined
+      - (nginx_build_number | string) is match('^[0-9]+$')
+      - (nginx_http_port | string) is match('^[0-9]+$')
+      - nginx_http_port | int >= 1
+      - nginx_http_port | int <= 65535
+    fail_msg: A numeric build number and valid HTTP port are required.
+
+- name: Confirm the bootstrap prerequisites exist
+  ansible.builtin.stat:
+    path: "{{ item }}"
+  loop:
+    - /usr/sbin/nginx
+    - /var/www/cicd-lab
+  register: nginx_prerequisites
+
+- name: Require the bootstrap playbook before deploying
+  ansible.builtin.assert:
+    that:
+      - item.stat.exists
+    fail_msg: Run playbooks/bootstrap.yml once before deploying or using check mode.
+  loop: "{{ nginx_prerequisites.results }}"
+  loop_control:
+    label: "{{ item.item }}"
+
+- name: Copy the website from the checked out content
+  ansible.builtin.copy:
+    src: "{{ nginx_content_dir }}/index.html"
+    dest: /var/www/cicd-lab/index.html
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Validate and install the full NGINX configuration
+  ansible.builtin.template:
+    src: nginx.conf.j2
+    dest: /etc/nginx/nginx.conf
+    owner: root
+    group: root
+    mode: '0644'
+    backup: true
+    validate: /usr/sbin/nginx -t -c %s
+  notify: Reload nginx
+
+- name: Keep NGINX enabled and running
+  ansible.builtin.service:
+    name: nginx
+    state: started
+    enabled: true

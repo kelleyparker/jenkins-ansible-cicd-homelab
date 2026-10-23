@@ -1,0 +1,8 @@
+---
+- name: Deploy a validated NGINX configuration and website
+  hosts: nginx
+  become: true
+  gather_facts: false
+  any_errors_fatal: true
+  roles:
+    - role: nginx
